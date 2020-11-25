@@ -1,32 +1,68 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Nav class="app__nav-component" />
+
+    <main class="app__main-section">
+
+		<section class="app__user-panel-container">
+			<UserPanel class="app__user-panel-component" />
+		</section>
+
+		<section class="app__table-container">
+			<!-- <Table
+				class="app__table-component" 
+				@removeProduct="removeProduct"
+			/> -->
+		</section>
+
+    </main>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Nav from './components/Nav'
+// import Table from './components/Table'
+import UserPanel from './components/UserPanel'
+import "bootstrap-vue/dist/bootstrap-vue.css"
+import "bootstrap/dist/css/bootstrap.min.css"
+
+export default {
+  name: 'App',
+  components: {
+    Nav,
+    // Table,
+    UserPanel
+  },
+//  created () {
+//      this.$store.dispatch('requestProducts')
+//   },
+//   methods: {
+//     removeProduct (item) {
+//       this.$store.dispatch('removeProduct', item)
+//     }
+//   }
 }
+</script>
 
-#nav {
-  padding: 30px;
+<style lang="scss">
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+  }
+  .app__user-panel-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .page-link {
+    color: black;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    &:hover {
+      background-color: #1e2933;
+      color: white;
     }
   }
-}
+  .page-item.active .page-link {  
+    background-color: #1e2933;
+    border: none;  
+  }
 </style>
