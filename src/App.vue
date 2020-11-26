@@ -3,44 +3,58 @@
     <Nav class="app__nav-component" />
 
     <main class="app__main-section">
-
 		<section class="app__user-panel-container">
 			<UserPanel class="app__user-panel-component" />
 		</section>
 
 		<section class="app__table-container">
-			<!-- <Table
-				class="app__table-component" 
-				@removeProduct="removeProduct"
-			/> -->
+			<Form />
+			<b-list-group>
+				<todo
+					v-for="todo in todos" 
+					:key="todo.id"
+					v-bind="todo"
+				/>
+			</b-list-group>
 		</section>
-
+		<footer class="blockquote-footer">
+			<span>
+				List: {{ todos.length }}
+			</span>
+		</footer>
     </main>
   </div>
 </template>
 
 <script>
-import Nav from './components/Nav'
-// import Table from './components/Table'
-import UserPanel from './components/UserPanel'
+import Nav from '@/components/Nav'
+import Form from "@/components/Form"
+import UserPanel from '@/components/UserPanel'
+import Todo from "@/components/Todo"
+
 import "bootstrap-vue/dist/bootstrap-vue.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 export default {
-  name: 'App',
-  components: {
-    Nav,
-    // Table,
-    UserPanel
-  },
-//  created () {
-//      this.$store.dispatch('requestProducts')
-//   },
-//   methods: {
-//     removeProduct (item) {
-//       this.$store.dispatch('removeProduct', item)
-//     }
-//   }
+	name: 'App',
+	components: {
+		Nav,
+		UserPanel,
+		Form,
+		Todo
+	},
+		data: () => ({
+		filter: 'all',
+	}),
+	computed: {
+		todos() {
+			return this.$store.state.todos
+		},
+		search() {
+			
+		}
+	},
+
 }
 </script>
 
